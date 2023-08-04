@@ -18,16 +18,20 @@ function iniciaRelogio() {
   }, 1000);
 }
 
-botaoIniciar.addEventListener(
-  "click",
-  () => clearInterval(timer),
-  iniciaRelogio()
-);
+function zerarRelogio() {
+  clearInterval(timer);
+  segundos = 0;
+  relogio.innerHTML = "00:00:00";
+}
 
-botaoPausar.addEventListener("click", () => clearInterval(timer));
+botaoIniciar.addEventListener("click", () => {
+  clearInterval(timer), iniciaRelogio(), relogio.classList.remove("pausado");
+});
 
-botaoZerar.addEventListener(
-  "click",
-  () => (relogio.innerHTML = "00:00:00"),
-  (segundos = 0)
-);
+botaoPausar.addEventListener("click", () => {
+  clearInterval(timer), relogio.classList.add("pausado");
+});
+
+botaoZerar.addEventListener("click", () => {
+  zerarRelogio(), relogio.classList.remove("pausado");
+});
