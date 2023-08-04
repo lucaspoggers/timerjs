@@ -5,6 +5,20 @@ const botaoZerar = document.querySelector(".zerar");
 let segundos = 0;
 let timer;
 
+document.addEventListener("click", (e) => {
+  const element = e.target;
+
+  if (element.classList.contains("iniciar")) {
+    iniciaRelogio();
+  }
+  if (element.classList.contains("pausar")) {
+    pausarRelogio();
+  }
+  if (element.classList.contains("zerar")) {
+    zerarRelogio();
+  }
+});
+
 function getTimeFromSeconds(segundos) {
   const data = new Date(segundos * 1000);
 
@@ -21,17 +35,10 @@ function iniciaRelogio() {
 function zerarRelogio() {
   clearInterval(timer);
   segundos = 0;
+  relogio.classList.remove("pausado");
   relogio.innerHTML = "00:00:00";
 }
 
-botaoIniciar.addEventListener("click", () => {
-  clearInterval(timer), iniciaRelogio(), relogio.classList.remove("pausado");
-});
-
-botaoPausar.addEventListener("click", () => {
+const pausarRelogio = () => {
   clearInterval(timer), relogio.classList.add("pausado");
-});
-
-botaoZerar.addEventListener("click", () => {
-  zerarRelogio(), relogio.classList.remove("pausado");
-});
+};
